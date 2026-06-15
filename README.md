@@ -18,3 +18,9 @@ MIT – siehe `LICENSE`.
 
 ## Tags (für GitHub)
 esp32, arduino, mqtt, tft, sd-card, webui, gateway, iot
+
+---
+
+## Kontakt
+
+**Entwickler:** Yanis Ameseder · **E-Mail:** [g4me.over.18@gmail.com](mailto:g4me.over.18@gmail.com)
