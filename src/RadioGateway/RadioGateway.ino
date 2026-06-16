@@ -56,7 +56,11 @@
 
 // ===================== USER SETTINGS (AUTH) =====================
 static const char* RG_USER = "yanis";
-#define RG_PASSWORD "changeme"   // WebUI Login (BasicAuth)
+// WebUI Login (BasicAuth). UNBEDINGT ändern! Per build_flag überschreibbar:
+//   build_flags = -DRG_PASSWORD='"DeinSicheresPasswort"'
+#ifndef RG_PASSWORD
+#define RG_PASSWORD "changeme"
+#endif
 
 // ===================== DEVICE META =====================
 static const char* RG_HOSTNAME_DEFAULT = "RadioGateway";
