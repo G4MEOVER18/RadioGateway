@@ -22,6 +22,9 @@ Desktop.ini
 # Logs
 *.log
 
+# Release-Artefakte (gehören an GitHub Releases)
+release-bins/
+
 # Secrets / local config
 secrets.h
 wifi_secrets.h

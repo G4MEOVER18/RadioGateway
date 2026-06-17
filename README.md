@@ -1,23 +1,61 @@
+<div align="center">
+
 # RadioGateway
 
-ESP32‑Gateway‑Sketch mit AP/STA, WebUI, MQTT, SD‑Config und optional Display/Backlight. Enthält mehrere Entwicklungsstände (v1–v4, UI‑Tests, Qwen‑Varianten).
+**ESP32-Gateway mit WiFi (AP/STA), WebUI, MQTT, SD-Konfiguration und optionalem TFT-Display.**
 
-## Inhalt
-- `src/` – aktueller Sketch / Hauptcode
-- `versions/` – ältere Stände / Experimente (unverändert oder leicht bereinigt)
-- `docs/` – Pins, Aufbau, Hinweise
-- `assets/` – Bilder/Logos (falls vorhanden)
+[![Plattform](https://img.shields.io/badge/Plattform-ESP32-blue?style=flat-square)](.)
+[![Build](https://img.shields.io/badge/Build-PlatformIO%20(pioarduino)-orange?style=flat-square&logo=platformio)](https://platformio.org)
+[![Core](https://img.shields.io/badge/Arduino--ESP32-3.1.x-green?style=flat-square)](.)
+[![Lizenz](https://img.shields.io/badge/Lizenz-MIT-green?style=flat-square)](LICENSE)
 
-## Build (Arduino IDE)
-1. Board: **ESP32 / ESP32‑S3** (je nach Projekt)  
-2. Libraries: siehe `docs/DEPENDENCIES.md`
-3. Öffne den `.ino` unter `src/` und flashe.
+</div>
+
+---
+
+Ein eigenständiges ESP32-Gateway: spannt einen Access-Point auf **und** verbindet sich mit dem WLAN (AP/STA), bietet eine passwortgeschützte **WebUI** zur Konfiguration, einen **MQTT**-Client zur Anbindung an Smart-Home/Broker, lädt seine Konfiguration von **SD-Karte** und zeigt den Status optional auf einem **TFT-Display** (LovyanGFX).
+
+## Features
+
+| Bereich | Funktion |
+|---------|----------|
+| **WiFi** | Gleichzeitig AP + STA, mDNS, Status-Anzeige |
+| **WebUI** | Passwortgeschützt (BasicAuth), Status, Konfiguration, REST-API (`/api/status`, `/api/clients`, …) |
+| **MQTT** | PubSubClient, konfigurierbarer Broker, Last-Message-Anzeige |
+| **SD** | Konfiguration laden/speichern, Diagnose |
+| **Display** | Optional ILI9341/CYD über LovyanGFX, Backlight-PWM (Core-3.x-LEDC) |
+
+## ⚠️ Vor dem ersten Einsatz
+
+Das WebUI-Passwort hat den Default `changeme` — **unbedingt ändern**, am besten per Build-Flag (nicht im Code):
+
+```ini
+build_flags = -DRG_PASSWORD='"DeinSicheresPasswort"'
+```
+
+## Fertige Firmware
+
+Vorkompiliertes Image unter [**Releases**](https://github.com/G4MEOVER18/RadioGateway/releases/latest):
+
+```bash
+esptool.py --chip esp32 write_flash 0x0 RadioGateway_esp32_v1.0.0_merged.bin
+```
+
+## Selbst bauen (PlatformIO)
+
+```bash
+pio run                       # bauen
+pio run -t upload             # flashen
+pio device monitor -b 115200  # serielle Ausgabe
+```
+
+Der Sketch nutzt die **Arduino-ESP32 Core 3.1.x LEDC-API** (`ledcAttach`), die das offizielle PlatformIO (noch) nicht bietet. Daher die **pioarduino**-Plattform (in `platformio.ini` gepinnt). Details: [`docs/DEPENDENCIES.md`](docs/DEPENDENCIES.md).
+
+> **Hinweis zu `versions/` und `legacy/`:** Diese Ordner enthalten ältere Entwicklungsstände (v1–v4, UI-Tests). Der gebaute, lauffähige Stand ist `src/RadioGateway/`.
 
 ## Lizenz
-MIT – siehe `LICENSE`.
 
-## Tags (für GitHub)
-esp32, arduino, mqtt, tft, sd-card, webui, gateway, iot
+MIT – siehe [LICENSE](LICENSE). © 2026 Yanis Ameseder
 
 ---
 
