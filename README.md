@@ -2,6 +2,8 @@
 
 # RadioGateway
 
+[![CI](https://github.com/G4MEOVER18/RadioGateway/actions/workflows/platformio-build.yml/badge.svg)](https://github.com/G4MEOVER18/RadioGateway/actions/workflows/platformio-build.yml)
+
 **ESP32-Gateway mit WiFi (AP/STA), WebUI, MQTT, SD-Konfiguration und optionalem TFT-Display.**
 
 [![Plattform](https://img.shields.io/badge/Plattform-ESP32-blue?style=flat-square)](.)
